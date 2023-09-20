@@ -49,7 +49,7 @@ docker compose run frontend npm install && npm run build
 
 ```
 docker build -t slack_web_backend .
-docker run -d --name slack_web_backend -p 80:80 slack_web_backend
+docker run -d --name slack_web_backend -p 8000:8000 slack_web_backend
 ```
 
 ### Nginx を利用する場合
