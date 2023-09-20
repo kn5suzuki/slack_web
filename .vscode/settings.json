@@ -1,0 +1,26 @@
+{
+  "python.defaultInterpreterPath": "~/.pyenv/shims/python3",
+  "python.analysis.extraPaths": [
+    "~/.local/share/virtualenvs/slack_web-cZVJ-t0m/lib/python3.10/site-packages"
+  ],
+  "cSpell.words": [
+    "boxlayout",
+    "dotenv",
+    "fastapi",
+    "kivy",
+    "pipenv",
+    "pydantic",
+    "pyenv",
+    "pyinstaller",
+    "screenmanager",
+    "scrollview",
+    "starlette"
+  ],
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "flake8.args": ["--max-line-length=120"]
+}
