@@ -35,9 +35,11 @@ export default function Reminder({
 
   const handleReactionReminder = () => {
     const mentionMembers = members.filter(
-      (member) => !message.reactors.some((reactor) => reactor.id === member.id)
+      (member) =>
+        !message.reactors.some((reactor) => reactor.id === member.id) &&
+        !(message.sender.id === member.id)
     );
-    const url = new URL(import.meta.env.BaseUrl + "/reply");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "reply");
     fetch(url, {
       method: "POST",
       headers: {
@@ -73,9 +75,10 @@ export default function Reminder({
   const handleReplyReminder = () => {
     const mentionMembers = members.filter(
       (member) =>
-        !message.replyUsers.some((replyUser) => replyUser.id === member.id)
+        !message.replyUsers.some((replyUser) => replyUser.id === member.id) &&
+        !(message.sender.id === member.id)
     );
-    const url = new URL(import.meta.env.BaseUrl + "/reply");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "reply");
     fetch(url, {
       method: "POST",
       headers: {

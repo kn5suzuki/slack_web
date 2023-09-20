@@ -66,7 +66,7 @@ export default function ChannelDetail({
   const handleClickOpen = () => {
     resetState();
     setOpen(true);
-    const url = new URL(import.meta.env.BaseUrl + "/members");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "members");
     url.searchParams.append("channel_id", channelId);
     fetch(url, {
       method: "GET",
@@ -101,7 +101,7 @@ export default function ChannelDetail({
 
   const handleSendMessage = async () => {};
   const handleSearchMessage = async () => {
-    const url = new URL(import.meta.env.BaseUrl + "/messages");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "messages");
     url.searchParams.append("channel_id", channelId);
     url.searchParams.append("query", query);
     fetch(url, {

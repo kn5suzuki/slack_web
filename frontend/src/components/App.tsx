@@ -10,7 +10,7 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const url = new URL(import.meta.env.BaseUrl + "/channels");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "channels");
     fetch(url, {
       method: "GET",
       headers: {
