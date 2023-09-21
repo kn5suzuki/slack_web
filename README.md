@@ -13,7 +13,7 @@
 docker compose run frontend npm install
 ```
 
-`frontend/.env`に以下のようにバックエンドの url を追加
+`frontend/.env`に以下のようにバックエンドの url を追加（最後の/まで入れること）
 
 ```
 VITE_BACKEND_URL = "http://localhost:8000/"
@@ -34,7 +34,7 @@ docker compose up
 `frontend/.env`に以下のようにバックエンドの url を追加
 
 ```
-VITE_BACKEND_URL = "http://localhost:8000/"
+VITE_BACKEND_URL = "http://hostname/backend/"
 ```
 
 パッケージインストールとビルド
@@ -56,9 +56,16 @@ docker run -d --name slack_web_backend -p 8000:8000 slack_web_backend
 
 ```
 server {
-	root path to/frontend/dist;
-    location /backend {
-        proxy_pass http://localhost:8000/;
-    }
+	location / {
+        	root path-to/frontend/dist;
+        	try_files $uri $uri/ =404;
+    	}
+	location /backend/ {
+        	proxy_pass http://localhost:8000/;
+        	proxy_set_header Host $host;
+        	proxy_set_header X-Real-IP $remote_addr;
+       		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        	proxy_set_header X-Forwarded-Proto $scheme;
+    	}
 }
 ```
