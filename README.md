@@ -2,8 +2,17 @@
 
 ## はじめに
 
-[公式ページ](https://api.slack.com/apps)からアプリを作成し、slack の token を入手する必要がある
-必要な権限
+[公式ページ](https://api.slack.com/apps)から slack アプリを作成し、token を入手する必要がある
+
+### 必要な権限
+
+- channels:history
+- channels:read
+- groups:history
+- groups:read
+- chat:write
+- im:history
+- reactions:read
 
 ## 開発セットアップ
 
