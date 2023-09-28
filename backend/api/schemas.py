@@ -25,3 +25,9 @@ class messageData(BaseModel):
     senderId: str
     reactorIds: List[str]
     replyUserIds: List[str]
+
+
+class countData(BaseModel):
+    ts: str
+    text: str
+    senderId: str

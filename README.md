@@ -12,7 +12,12 @@
 - groups:read
 - chat:write
 - im:history
+- mpim:history
 - reactions:read
+
+## アプリの説明
+
+最初に作成した自分のトークンを入力する
 
 ## 開発セットアップ
 
@@ -49,7 +54,8 @@ VITE_BACKEND_URL = "http://hostname/backend/"
 パッケージインストールとビルド
 
 ```
-docker compose run frontend npm install && npm run build
+docker compose run frontend npm install
+docker compose run frontend npm run build
 ```
 
 ### バックエンド

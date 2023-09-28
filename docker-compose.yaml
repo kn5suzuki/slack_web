@@ -14,4 +14,4 @@ services:
       - 8000:8000
     volumes:
       - ./backend:/app
-    command: uvicorn main:app --reload
+    command: uvicorn main:app --host 0.0.0.0 --reload

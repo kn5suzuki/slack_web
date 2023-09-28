@@ -32,7 +32,9 @@ export default function MemberList({ members }: { members: Member[] }) {
 
   return (
     <div>
-      <Button onClick={handleClickOpen("paper")}>Members</Button>
+      <Button onClick={handleClickOpen("paper")} style={{ color: "white" }}>
+        Members
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -47,7 +49,6 @@ export default function MemberList({ members }: { members: Member[] }) {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {/* {members.map((member) => member.name).join("\n")} */}
             {members.map((member, index) => (
               <React.Fragment key={index}>
                 {member.name}

@@ -3,13 +3,16 @@ from dotenv import load_dotenv
 
 from slack_sdk.web import WebClient
 
+
 def get_replies_list(client, CHANNEL_ID: str, ts: str):
     replies = []
     # メッセージに対する全ての返信を取得
     has_more = True
     cursor = ""
     while has_more:
-        response = client.conversations_replies(channel="YOUR_CHANNEL_ID", ts=ts, cursor=cursor, limit=10)
+        response = client.conversations_replies(
+            channel="YOUR_CHANNEL_ID", ts=ts, cursor=cursor, limit=10)
+        print(response)
         messages = response["messages"]
         replies.extend(messages)
         if response["has_more"]:
@@ -17,3 +20,9 @@ def get_replies_list(client, CHANNEL_ID: str, ts: str):
         else:
             has_more = False
     return replies
+
+
+if __name__ == "__main__":
+    load_dotenv()
+    SLACK_API_TOKEN = os.getenv('BotUserOAuthToken')
+    client = WebClient(token=SLACK_API_TOKEN)

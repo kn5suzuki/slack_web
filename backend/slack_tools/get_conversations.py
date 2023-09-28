@@ -6,7 +6,7 @@ from slack_sdk.web import WebClient
 
 def get_conversations(client, CHANNEL_ID: str):
     return client.conversations_history(
-        channel=CHANNEL_ID, limit=100)['messages']
+        channel=CHANNEL_ID, limit=200)['messages']
 
 
 if __name__ == "__main__":

@@ -18,11 +18,14 @@ export default function ChannelTable({
   channels: Channel[];
 }) {
   return (
-    <TableContainer component={Paper} sx={{ width: "70%", m: "auto" }}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer
+      component={Paper}
+      sx={{ marginTop: 5, width: "80%", maxWidth: 1000 }}
+    >
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>チャンネル名</TableCell>
+            <TableCell sx={{ typography: "body1" }}>チャンネル名</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
