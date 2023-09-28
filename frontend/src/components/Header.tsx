@@ -12,7 +12,14 @@ export default function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Slack Management
           </Typography>
-          <Button color="inherit">Help</Button>
+          <Button
+            color="inherit"
+            component="a"
+            href="https://github.com/kn5suzuki/slack_web"
+            target="_blank"
+          >
+            Help
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
