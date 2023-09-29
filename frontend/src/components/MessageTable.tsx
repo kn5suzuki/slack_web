@@ -1,3 +1,4 @@
+import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -5,10 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 import { Message } from "../types/Message";
 import ReminderDialog from "./ReminderDialog";
 import { Member } from "../types/Member";
+import MouseOverPopover from "./MouseOverPopover";
 
 export default function MessageTable({
   token,
@@ -55,7 +58,21 @@ export default function MessageTable({
                 <TableCell component="th">{message.sender.name}</TableCell>
                 <TableCell component="th">{message.text}</TableCell>
                 <TableCell component="th">
-                  {message.reactors.length}人/{members.length}人
+                  <MouseOverPopover
+                    label={`${message.reactors.length}人/${members.length}人`}
+                    content={
+                      <Typography sx={{ p: 1 }}>
+                        {message.reactors.length === 0
+                          ? "None"
+                          : message.reactors.map((member, index) => (
+                              <React.Fragment key={index}>
+                                {member.name}
+                                {index !== members.length - 1 && <br />}
+                              </React.Fragment>
+                            ))}
+                      </Typography>
+                    }
+                  />
                   <ReminderDialog
                     token={token}
                     channelId={channelId}
@@ -64,7 +81,21 @@ export default function MessageTable({
                   />
                 </TableCell>
                 <TableCell component="th">
-                  {message.replyUsers.length}人/{members.length}人
+                  <MouseOverPopover
+                    label={`${message.replyUsers.length}人/${members.length}人`}
+                    content={
+                      <Typography sx={{ p: 1 }}>
+                        {message.replyUsers.length === 0
+                          ? "None"
+                          : message.replyUsers.map((member, index) => (
+                              <React.Fragment key={index}>
+                                {member.name}
+                                {index !== members.length - 1 && <br />}
+                              </React.Fragment>
+                            ))}
+                      </Typography>
+                    }
+                  />
                   <ReminderDialog
                     token={token}
                     channelId={channelId}

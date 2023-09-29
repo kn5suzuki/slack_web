@@ -90,7 +90,6 @@ async def count_posts(channel_id: str, query: str, month: str = "", token: str =
                               "senderId": message["user"]}
                     response.append(result)
 
-                print(channel_id, ts)
                 if 'reply_users' in message:
                     replies = get_replies_list(client, channel_id, ts)
                     for reply in replies:

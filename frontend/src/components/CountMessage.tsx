@@ -12,6 +12,8 @@ import { useState } from "react";
 import fetchWrapper from "../utils/fetchWrapper";
 import { CountData, CountResult } from "../types/Count";
 import CountResultTable from "./CountResultTable";
+import decodeTimestamp from "../utils/decodeTimestamp";
+import CircularIndeterminate from "./CircularIndeterminate";
 
 export default function CountMessage({
   token,
@@ -23,9 +25,10 @@ export default function CountMessage({
   members: Member[];
 }) {
   const [query, setQuery] = useState<string>("");
-  const [month, setMonth] = useState<string>("");
+  const [month, setMonth] = useState<string>(`${new Date().getMonth() + 1}`);
   const [sentQuery, setSentQuery] = useState<boolean>(false);
   const [result, setResult] = useState<CountResult[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const makeCountResult = (
     countData: CountData[],
@@ -39,7 +42,10 @@ export default function CountMessage({
     countData.forEach((data) => {
       result.map((member) => {
         if (member.id === data.senderId) {
-          member.messages.push({ ts: data.ts, text: data.text });
+          member.messages.push({
+            date: decodeTimestamp(data.ts),
+            text: data.text,
+          });
         }
       });
     });
@@ -50,6 +56,7 @@ export default function CountMessage({
   const handleSearchMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSentQuery(false);
+    setLoading(true);
     const url = new URL(import.meta.env.VITE_BACKEND_URL + "count");
     url.searchParams.append("channel_id", channelId);
     url.searchParams.append("query", query);
@@ -67,6 +74,7 @@ export default function CountMessage({
       setResult(result);
       setSentQuery(true);
     }
+    setLoading(false);
   };
   return (
     <>
@@ -95,11 +103,9 @@ export default function CountMessage({
             value={month}
             onChange={(e) => setMonth(e.target.value)}
             autoWidth
-            label="Age"
+            label="Month"
+            required
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
             {[...Array(12)].map((_, i) => (
               <MenuItem key={i + 1} value={i + 1}>
                 {i + 1}
@@ -111,6 +117,7 @@ export default function CountMessage({
           Search
         </Button>
       </Box>
+      {loading && <CircularIndeterminate />}
       {sentQuery && <CountResultTable result={result} />}
     </>
   );

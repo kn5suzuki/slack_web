@@ -11,6 +11,6 @@ export type CountResult = {
 };
 
 export type MessageSummary = {
-  ts: string;
+  date: string;
   text: string;
 };

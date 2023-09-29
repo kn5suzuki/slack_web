@@ -6,6 +6,8 @@
 
 ### 必要な権限
 
+上記ページでアプリを作成する際に`OAuth & Permissions`から Bot Token Scope または User Token Scope に以下の権限を付与する
+
 - channels:history
 - channels:read
 - groups:history
@@ -14,6 +16,8 @@
 - im:history
 - mpim:history
 - reactions:read
+
+これらを追加できたらアプリをワークスペースにインストール（再インストール）する
 
 ## アプリの説明
 

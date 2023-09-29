@@ -5,6 +5,7 @@ import { Box, Button, TextField } from "@mui/material";
 import MessageTable from "./MessageTable";
 import rawMessagesToMessages from "../utils/rawMessagesToMessages";
 import fetchWrapper from "../utils/fetchWrapper";
+import CircularIndeterminate from "./CircularIndeterminate";
 
 export default function RemindMessage({
   token,
@@ -18,9 +19,12 @@ export default function RemindMessage({
   const [messages, setMessages] = useState<Message[]>([]);
   const [query, setQuery] = useState<string>("");
   const [sentQuery, setSentQuery] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSearchMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSentQuery(false);
+    setLoading(true);
     const url = new URL(import.meta.env.VITE_BACKEND_URL + "messages");
     url.searchParams.append("channel_id", channelId);
     url.searchParams.append("query", query);
@@ -37,6 +41,7 @@ export default function RemindMessage({
       setMessages(formattedData);
       setSentQuery(true);
     }
+    setLoading(false);
   };
   return (
     <>
@@ -61,6 +66,7 @@ export default function RemindMessage({
           Search
         </Button>
       </Box>
+      {loading && <CircularIndeterminate />}
       {sentQuery && (
         <MessageTable
           token={token}

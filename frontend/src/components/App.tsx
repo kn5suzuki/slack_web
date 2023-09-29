@@ -3,14 +3,18 @@ import { Box, Button, TextField } from "@mui/material";
 import ChannelTable from "./ChannelTable";
 import { Channel } from "../types/Channel";
 import fetchWrapper from "../utils/fetchWrapper";
+import CircularIndeterminate from "./CircularIndeterminate";
 
 function App() {
   const [token, setToken] = useState<string>("");
   const [submittedToken, setSubmittedToken] = useState<boolean>(false);
   const [channels, setChannels] = useState<Channel[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmittedToken(false);
+    setLoading(true);
     const url = new URL(import.meta.env.VITE_BACKEND_URL + "channels");
     const data = await fetchWrapper<Channel[]>(url, {
       method: "GET",
@@ -22,9 +26,8 @@ function App() {
     if (data) {
       setChannels(data);
       setSubmittedToken(true);
-    } else {
-      setSubmittedToken(false);
     }
+    setLoading(false);
   };
 
   return (
@@ -59,6 +62,7 @@ function App() {
         </Button>
       </Box>
 
+      {loading && <CircularIndeterminate />}
       {submittedToken && <ChannelTable token={token} channels={channels} />}
     </Box>
   );
