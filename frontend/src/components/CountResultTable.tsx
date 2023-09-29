@@ -36,15 +36,19 @@ export default function CountResultTable({
                 <MouseOverPopover
                   label={`${channel.messages.length}回`}
                   content={
-                    <Typography sx={{ p: 1 }}>
+                    <Typography sx={{ p: 1, maxWidth: 800 }}>
                       {channel.messages.length === 0
                         ? "None"
                         : channel.messages.map(
                             (message: MessageSummary, index) => (
                               <React.Fragment key={index}>
-                                {message.date} {message.text}
+                                {message.date} <br />
+                                {message.text}
                                 {index !== channel.messages.length - 1 && (
-                                  <br />
+                                  <>
+                                    <br />
+                                    <br />
+                                  </>
                                 )}
                               </React.Fragment>
                             )
