@@ -34,7 +34,7 @@ docker compose run frontend npm install
 `frontend/.env`に以下のようにバックエンドの url を追加（最後の/まで入れること）
 
 ```
-VITE_BACKEND_URL = "http://localhost:8000/"
+VITE_BACKEND_URL = "http://localhost:8000"
 ```
 
 起動
@@ -52,7 +52,7 @@ docker compose up
 `frontend/.env`に以下のようにバックエンドの url を追加
 
 ```
-VITE_BACKEND_URL = "http://hostname/backend/"
+VITE_BACKEND_URL = "http://hostname/backend"
 ```
 
 パッケージインストールとビルド
