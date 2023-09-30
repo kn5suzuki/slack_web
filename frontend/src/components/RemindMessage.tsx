@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Message, RawMessage } from "../types/Message";
 import { Member } from "../types/Member";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import MessageTable from "./MessageTable";
 import rawMessagesToMessages from "../utils/rawMessagesToMessages";
 import fetchWrapper from "../utils/fetchWrapper";
 import CircularIndeterminate from "./CircularIndeterminate";
+import { StyledButton } from "./StyledButton";
 
 export default function RemindMessage({
   token,
@@ -25,7 +26,7 @@ export default function RemindMessage({
     e.preventDefault();
     setSentQuery(false);
     setLoading(true);
-    const url = new URL(import.meta.env.VITE_BACKEND_URL + "messages");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "/messages");
     url.searchParams.append("channel_id", channelId);
     url.searchParams.append("query", query);
 
@@ -62,9 +63,9 @@ export default function RemindMessage({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <Button type="submit" variant="contained" sx={{ width: 150 }}>
-          Search
-        </Button>
+        <StyledButton type="submit" variant="contained" sx={{ width: 150 }}>
+          検索
+        </StyledButton>
       </Box>
       {loading && <CircularIndeterminate />}
       {sentQuery && (

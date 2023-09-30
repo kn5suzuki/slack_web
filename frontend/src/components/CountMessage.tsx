@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -14,6 +13,7 @@ import { CountData, CountResult } from "../types/Count";
 import CountResultTable from "./CountResultTable";
 import decodeTimestamp from "../utils/decodeTimestamp";
 import CircularIndeterminate from "./CircularIndeterminate";
+import { StyledButton } from "./StyledButton";
 
 export default function CountMessage({
   token,
@@ -57,7 +57,7 @@ export default function CountMessage({
     e.preventDefault();
     setSentQuery(false);
     setLoading(true);
-    const url = new URL(import.meta.env.VITE_BACKEND_URL + "count");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "/count");
     url.searchParams.append("channel_id", channelId);
     url.searchParams.append("query", query);
     url.searchParams.append("month", month);
@@ -113,9 +113,9 @@ export default function CountMessage({
             ))}
           </Select>
         </FormControl>
-        <Button type="submit" variant="contained" sx={{ width: 150 }}>
-          Search
-        </Button>
+        <StyledButton type="submit" variant="contained" sx={{ width: 150 }}>
+          集計
+        </StyledButton>
       </Box>
       {loading && <CircularIndeterminate />}
       {sentQuery && <CountResultTable result={result} />}

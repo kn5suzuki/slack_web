@@ -6,7 +6,12 @@ class ReplyData(BaseModel):
     channel_id: str
     ts: str
     message: str
-    mention_names: List[str]
+    mention_names: List[str] = []
+
+
+class postMessageData(BaseModel):
+    channel_id: str
+    text: str
 
 
 class channelData(BaseModel):

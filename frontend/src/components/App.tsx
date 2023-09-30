@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField, styled } from "@mui/material";
 import ChannelTable from "./ChannelTable";
 import { Channel } from "../types/Channel";
 import fetchWrapper from "../utils/fetchWrapper";
 import CircularIndeterminate from "./CircularIndeterminate";
+import { StyledButton } from "./StyledButton";
 
 function App() {
   const [token, setToken] = useState<string>("");
@@ -15,7 +16,7 @@ function App() {
     e.preventDefault();
     setSubmittedToken(false);
     setLoading(true);
-    const url = new URL(import.meta.env.VITE_BACKEND_URL + "channels");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "/channels");
     const data = await fetchWrapper<Channel[]>(url, {
       method: "GET",
       headers: {
@@ -29,6 +30,15 @@ function App() {
     }
     setLoading(false);
   };
+
+  const StyledTextField = styled(TextField)({
+    "& label": {
+      fontSize: 16,
+      "@media (max-width: 768px)": {
+        fontSize: 10,
+      },
+    },
+  });
 
   return (
     <Box
@@ -46,7 +56,7 @@ function App() {
         onSubmit={handleSubmit}
         sx={{ mt: 3, width: "80%", maxWidth: 800 }}
       >
-        <TextField
+        <StyledTextField
           required
           fullWidth
           name="token"
@@ -57,9 +67,9 @@ function App() {
           onChange={(e) => setToken(e.target.value)}
         />
 
-        <Button type="submit" fullWidth variant="contained" sx={{ width: 200 }}>
-          Set Token
-        </Button>
+        <StyledButton type="submit" fullWidth variant="contained">
+          決定
+        </StyledButton>
       </Box>
 
       {loading && <CircularIndeterminate />}

@@ -42,7 +42,7 @@ export default function ChannelOperations({
     <Box sx={{ width: "80%" }}>
       <Accordion>
         <CustomizedAccordionSummary>
-          <Typography variant="h5">1. Send message to this channel</Typography>
+          <Typography variant="h5">1. メッセージを送る</Typography>
         </CustomizedAccordionSummary>
         <AccordionDetails>
           <SendMessage token={token} channelId={channelId} />
@@ -50,9 +50,7 @@ export default function ChannelOperations({
       </Accordion>
       <Accordion>
         <CustomizedAccordionSummary>
-          <Typography variant="h5">
-            2. Send remind to a specific message
-          </Typography>
+          <Typography variant="h5">2. メッセージにリマインドを送る</Typography>
         </CustomizedAccordionSummary>
         <AccordionDetails>
           <RemindMessage
@@ -65,7 +63,7 @@ export default function ChannelOperations({
       <Accordion>
         <CustomizedAccordionSummary>
           <Typography variant="h5">
-            3. Count messages of channel members which contains a specific word
+            3. キーワード付きメッセージをカウントする
           </Typography>
         </CustomizedAccordionSummary>
         <AccordionDetails>

@@ -35,8 +35,8 @@ export default function ReminderDialog({
   };
 
   const handleReminder = async () => {
-    const url = new URL(import.meta.env.VITE_BACKEND_URL + "reply");
-    const data = await fetchWrapper(url, {
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "/reply");
+    const data = await fetchWrapper<string>(url, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -50,6 +50,7 @@ export default function ReminderDialog({
       }),
     });
     if (data) {
+      alert("リマインドしました");
       setOpen(false);
     }
   };

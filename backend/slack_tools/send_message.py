@@ -18,6 +18,8 @@ def send_message(client, channel_id, text, mention_names=[], mention_channel=Fal
 
 
 def send_response(client, channel_id, ts, text, mention_names=[]):
+    print(channel_id)
+    print(mention_names)
     if mention_names:
         mention_text = ''
         for member in mention_names:

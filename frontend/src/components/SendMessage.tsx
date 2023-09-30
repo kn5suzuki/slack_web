@@ -1,5 +1,7 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useState } from "react";
+import fetchWrapper from "../utils/fetchWrapper";
+import { StyledButton } from "./StyledButton";
 
 export default function SendMessage({
   token,
@@ -10,35 +12,28 @@ export default function SendMessage({
 }) {
   const [text, setText] = useState<string>("");
 
-  const handleSendMessage = async () => {
-    const url = new URL(import.meta.env.VITE_BACKEND_URL + "members");
-    url.searchParams.append("channel_id", channelId);
-    fetch(url, {
+  const handleSendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // apiClient.postMessageChannelsPost(`Bearer ${token}`, {
+    //   channel_id: channelId,
+    //   text: text,
+    // });
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "/channels");
+    const data = await fetchWrapper<string>(url, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        channel_id: channelId,
         text: text,
       }),
-    })
-      .then((res) => {
-        console.log("res: ", res);
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("data: ", data);
-      })
-      .catch((error) => {
-        console.log(
-          "There was a problem with the fetch operation:",
-          error.message
-        );
-      });
+    });
+    if (data) {
+      alert("メッセージを送信しました");
+      setText("");
+    }
   };
 
   return (
@@ -61,9 +56,9 @@ export default function SendMessage({
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <Button type="submit" variant="contained" sx={{ width: 150 }}>
-        Send
-      </Button>
+      <StyledButton type="submit" variant="contained" sx={{ width: 150 }}>
+        送信
+      </StyledButton>
     </Box>
   );
 }

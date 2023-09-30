@@ -44,7 +44,7 @@ export default function ChannelDetail({
   const handleClickOpen = async () => {
     resetState();
     setOpen(true);
-    const url = new URL(import.meta.env.VITE_BACKEND_URL + "members");
+    const url = new URL(import.meta.env.VITE_BACKEND_URL + "/members");
     url.searchParams.append("channel_id", channelId);
     const data = await fetchWrapper<Member[]>(url, {
       method: "GET",

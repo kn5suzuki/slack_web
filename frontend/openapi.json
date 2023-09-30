@@ -1,0 +1,372 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/channels": {
+      "get": {
+        "summary": "List Channels",
+        "operationId": "list_channels_channels_get",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "title": "Authorization" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/channelData" },
+                  "title": "Response List Channels Channels Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Post Message",
+        "operationId": "post_message_channels_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "title": "Authorization" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/postMessageData" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Post Message Channels Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/members": {
+      "get": {
+        "summary": "List Members",
+        "operationId": "list_members_members_get",
+        "parameters": [
+          {
+            "name": "channel_id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Channel Id" }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "title": "Authorization" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/memberData" },
+                  "title": "Response List Members Members Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages": {
+      "get": {
+        "summary": "List Messages",
+        "operationId": "list_messages_messages_get",
+        "parameters": [
+          {
+            "name": "channel_id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Channel Id" }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Query" }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "title": "Authorization" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/messageData" },
+                  "title": "Response List Messages Messages Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/count": {
+      "get": {
+        "summary": "Count Posts",
+        "operationId": "count_posts_count_get",
+        "parameters": [
+          {
+            "name": "channel_id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Channel Id" }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "title": "Query" }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "default": "", "title": "Month" }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "title": "Authorization" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/countData" },
+                  "title": "Response Count Posts Count Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reply": {
+      "post": {
+        "summary": "Post Reply",
+        "operationId": "post_reply_reply_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": { "type": "string", "title": "Authorization" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ReplyData" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "title": "Response Post Reply Reply Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ReplyData": {
+        "properties": {
+          "channel_id": { "type": "string", "title": "Channel Id" },
+          "ts": { "type": "string", "title": "Ts" },
+          "message": { "type": "string", "title": "Message" },
+          "mention_names": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Mention Names",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": ["channel_id", "ts", "message"],
+        "title": "ReplyData"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "channelData": {
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "name": { "type": "string", "title": "Name" }
+        },
+        "type": "object",
+        "required": ["id", "name"],
+        "title": "channelData"
+      },
+      "countData": {
+        "properties": {
+          "ts": { "type": "string", "title": "Ts" },
+          "text": { "type": "string", "title": "Text" },
+          "senderId": { "type": "string", "title": "Senderid" }
+        },
+        "type": "object",
+        "required": ["ts", "text", "senderId"],
+        "title": "countData"
+      },
+      "memberData": {
+        "properties": {
+          "id": { "type": "string", "title": "Id" },
+          "name": { "type": "string", "title": "Name" }
+        },
+        "type": "object",
+        "required": ["id", "name"],
+        "title": "memberData"
+      },
+      "messageData": {
+        "properties": {
+          "ts": { "type": "string", "title": "Ts" },
+          "text": { "type": "string", "title": "Text" },
+          "senderId": { "type": "string", "title": "Senderid" },
+          "reactorIds": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Reactorids"
+          },
+          "replyUserIds": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Replyuserids"
+          }
+        },
+        "type": "object",
+        "required": ["ts", "text", "senderId", "reactorIds", "replyUserIds"],
+        "title": "messageData"
+      },
+      "postMessageData": {
+        "properties": {
+          "channel_id": { "type": "string", "title": "Channel Id" },
+          "text": { "type": "string", "title": "Text" }
+        },
+        "type": "object",
+        "required": ["channel_id", "text"],
+        "title": "postMessageData"
+      }
+    }
+  }
+}
