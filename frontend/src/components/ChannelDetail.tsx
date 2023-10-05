@@ -55,6 +55,8 @@ export default function ChannelDetail({
     });
     if (data) {
       setMembers(data);
+    } else {
+      handleClose();
     }
   };
 

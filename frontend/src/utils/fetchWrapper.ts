@@ -30,7 +30,7 @@ export default async function fetchWrapper<T>(
       }
     } else {
       console.error(error);
-      alert(error);
+      alert("エラー！！\n" + error);
     }
     return null;
   }
