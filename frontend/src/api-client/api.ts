@@ -184,7 +184,7 @@ export interface ReplyData {
      * @type {Array<string>}
      * @memberof ReplyData
      */
-    'mention_names'?: Array<string>;
+    'mention_ids'?: Array<string>;
 }
 /**
  * 

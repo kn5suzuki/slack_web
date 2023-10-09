@@ -285,10 +285,10 @@
           "channel_id": { "type": "string", "title": "Channel Id" },
           "ts": { "type": "string", "title": "Ts" },
           "message": { "type": "string", "title": "Message" },
-          "mention_names": {
+          "mention_ids": {
             "items": { "type": "string" },
             "type": "array",
-            "title": "Mention Names",
+            "title": "Mention Ids",
             "default": []
           }
         },

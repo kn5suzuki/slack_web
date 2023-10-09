@@ -46,7 +46,7 @@ export default function ReminderDialog({
         channel_id: channelId,
         ts: message.id,
         message: reminderMessage,
-        mention_names: mentionMembers.map((member) => member.name),
+        mention_ids: mentionMembers.map((member) => member.id),
       }),
     });
     if (data) {

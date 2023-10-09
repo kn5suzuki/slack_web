@@ -117,7 +117,7 @@ async def post_reply(data: ReplyData = Body(), token: str = Depends(get_token)) 
     client = WebClient(token=token)
     try:
         response = send_response(client, data.channel_id, data.ts,
-                                 data.message, data.mention_names)
+                                 data.message, data.mention_ids)
         if response["ok"]:
             return "success"
     except Exception as e:
