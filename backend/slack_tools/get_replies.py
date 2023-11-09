@@ -12,7 +12,7 @@ def get_replies_list(client, channel_id: str, ts: str):
     while has_more:
         response = client.conversations_replies(
             channel=channel_id, ts=ts, cursor=cursor, limit=10)
-        messages = response["messages"]
+        messages = response["messages"][1:]
         replies.extend(messages)
         if response["has_more"]:
             cursor = response["response_metadata"]["next_cursor"]
