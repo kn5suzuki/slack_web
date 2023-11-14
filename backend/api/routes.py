@@ -66,9 +66,10 @@ async def list_messages(channel_id: str, query: str, token: str = Depends(get_to
         for message in messages:
             text = message["text"]
             ts = message["ts"]
+            userId = message["user"] if "user" in message else ""
             if query in text:
                 result = {"ts": ts, "text": text,
-                          "senderId": message["user"], "reactorIds": [], "replyUserIds": []}
+                          "senderId": userId, "reactorIds": [], "replyUserIds": []}
                 if 'reactions' in message:
                     result["reactorIds"] = list(
                         set([user for reaction in message["reactions"] for user in reaction["users"]]))
@@ -89,11 +90,12 @@ async def count_posts(channel_id: str, query: str, month: str = "", token: str =
         for message in messages:
             text = message["text"]
             ts = message["ts"]
+            userId = message["user"] if "user" in message else ""
             created_date = datetime.datetime.fromtimestamp(float(ts))
             if not month or created_date.month == int(month):
                 if query in text:
                     result = {"ts": ts, "text": text,
-                              "senderId": message["user"]}
+                              "senderId": userId}
                     response.append(result)
 
                 if 'reply_users' in message:
